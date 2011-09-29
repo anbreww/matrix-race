@@ -244,7 +244,7 @@ void _display_next_line(void)
 
     // load a line from the buffer and display it
     GREEN_PORT = flip_bits(_green_buffer[_active_buffer][line_pos]);
-    RED_PORT =   flip_bits(  _red_buffer[_active_buffer][line_pos]);
+    RED_PORT =   (  _red_buffer[_active_buffer][line_pos]);
 
     line_pos++;
     // call line_callback(line_pos);
