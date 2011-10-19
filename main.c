@@ -7,7 +7,7 @@
 
 #include <avr/io.h>
 #include "matrix/matrix.h"
-#include "track.h"
+#include "race/track.h"
 
 uint8_t car_pos = 0;
 uint8_t track_pos = 0; // tracks up to 256 lines
