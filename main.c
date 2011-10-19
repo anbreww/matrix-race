@@ -12,6 +12,14 @@
 uint8_t car_pos = 0;
 uint8_t track_pos = 0; // tracks up to 256 lines
 
+void game_init(void);
+void setup_interrupts(void);
+
+volatile struct Flags {
+	int game_running:1;
+	
+} flags;
+
 int main(void)
 {
     // LED matrix race game
@@ -23,9 +31,11 @@ int main(void)
      */
     game_init();
     setup_interrupts();
+	
+	flags.game_running = 1;
 
     // Start loop
-    while(flags.game_running)
+    while(flags.game_running == 1)
     {
         // reset display
         matrix_clear();
@@ -33,6 +43,7 @@ int main(void)
         // display car
         matrix_set_line(0,car_pos,RED); // set bottom line with one red dot
 
+		uint8_t i;
         // load 8 track segments
         for(i=0; i<8; i++)
         {
@@ -44,7 +55,7 @@ int main(void)
         }
     }
 
-return 0; // never reached
+    return 0; // never reached
 
 }
 
@@ -61,4 +72,5 @@ void setup_interrupts(void)
 {
     // interrupts for left and right buttons
     // timers for display refreshing and score counting?
+	return;
 }
