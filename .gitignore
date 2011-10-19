@@ -1,0 +1,11 @@
+*.o
+*.mk
+*.d
+*.map
+*.elf
+*.hex
+*.lss
+makefile
+*.cproject
+*.project
+*avreclipse*
