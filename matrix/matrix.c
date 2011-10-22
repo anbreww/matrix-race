@@ -10,6 +10,7 @@ void _display_next_line(void);
 #define RED_PORT    PORTB
 #define GREEN_PORT  PORTC
 
+
 // for double-buffering, let's store two tables of 8x8 pixels in RAM
 uint8_t _green_buffer[2][8] = {
     {
@@ -42,7 +43,7 @@ uint8_t _red_buffer[2][8] = {
         0b00000000,
         0b00000000,
         0b00000000,
-        0b01000000,
+        0b00000000,
         0b00000000
     },
     {
@@ -52,7 +53,7 @@ uint8_t _red_buffer[2][8] = {
         0b00000000,
         0b00000000,
         0b00000000,
-        0b10000000,
+        0b00000000,
         0b00000000
     }
 };
@@ -64,8 +65,6 @@ volatile uint8_t _active_buffer = 1;
 // temporary test function
 void matrix_test()
 {
-    PORTC ^= 0x04;
-
     _display_next_line();
 }
 
@@ -164,6 +163,22 @@ uint8_t flip_bits(uint8_t _byte)
     return output;
 }
 
+// **** CALLBACKS ****
+// to be replaced by pointers to functions
+void line_callback(uint8_t line_pos)
+{
+    // this function will be called after every line
+    return;
+}
+
+void frame_callback(void)
+{
+    static uint16_t frame_counter = 0;
+    // this function will be called at the end of every frame
+    
+    frame_counter++;
+    return;
+}
 
 
 // low-level functions
@@ -175,8 +190,8 @@ void _display_next_line(void)
     ANODE_PORT = ~_BV(line_pos);
 
     // load a line from the buffer and display it
-    GREEN_PORT = flip_bits(_green_buffer[_active_buffer][7-line_pos]);
-    RED_PORT =   flip_bits(  _red_buffer[_active_buffer][7-line_pos]);
+    GREEN_PORT = flip_bits(_green_buffer[_active_buffer][line_pos]);
+    RED_PORT =   flip_bits(  _red_buffer[_active_buffer][line_pos]);
 
     line_pos++;
     // call line_callback(line_pos);

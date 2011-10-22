@@ -7,4 +7,6 @@
 // define track in flash
 
 // provide functions to load a track segment into a variable
-uint8_t LOAD(uint16_t position);
+void track_increment_position(void);
+
+uint8_t track_load_line(uint8_t _line);
