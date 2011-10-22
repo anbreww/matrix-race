@@ -27,6 +27,8 @@ def lines_to_binary(lines, usehex):
     return output
 
 preamble = '''
+#ifndef _RACE_TRACK
+#define _RACE_TRACK
 /***********************************
  *                                 *
  *       Race track sample         *
@@ -37,15 +39,18 @@ preamble = '''
  *                                 *
  ***********************************/
 
+#include <avr/pgmspace.h>
+
  /*
   * this variable contains the race track
   * load segments using the functions from
   * track_utils.h
   */
 
- race_track[%s] = {'''
+ const unsigned char race_track[%s] PROGMEM = {'''
 
 postscript = ''' };
+#endif
  '''
 
 

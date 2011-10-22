@@ -1,4 +1,6 @@
 
+#ifndef _RACE_TRACK
+#define _RACE_TRACK
 /***********************************
  *                                 *
  *       Race track sample         *
@@ -9,13 +11,15 @@
  *                                 *
  ***********************************/
 
+#include <avr/pgmspace.h>
+
  /*
   * this variable contains the race track
   * load segments using the functions from
   * track_utils.h
   */
 
- race_track[300] = {
+ const unsigned char race_track[300] PROGMEM = {
     0b11001111,
     0b10001111,
     0b10001111,
@@ -317,4 +321,5 @@
     0b11110001,
     0b11110001
  };
+#endif
  
