@@ -9,3 +9,6 @@ makefile
 *.cproject
 *.project
 *avreclipse*
+*.swp
+*.lst
+*.out
