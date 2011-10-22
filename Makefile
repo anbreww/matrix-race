@@ -229,7 +229,7 @@ pygaload: hex
 	$(PYGALOAD) $(HEXROMTRG) -p $(PYGALOAD_PORT) -V
 
 # change this to "writeflash" to use avrdude by default
-install: pygaload
+install: writeflash
 
 $(DUMPTRG): $(TRG) 
 	$(OBJDUMP) -S  $< > $@
