@@ -47,7 +47,9 @@ preamble = '''
   * track_utils.h
   */
 
- const unsigned char race_track[%s] PROGMEM = {'''
+#define TRACK_LENGTH %s 
+
+const unsigned char race_track[%s] PROGMEM = {'''
 
 postscript = ''' };
 #endif
@@ -87,7 +89,7 @@ if __name__ == '__main__':
 
     line_prefix = "    " # 4 spaces
 
-    print preamble % len(array)
+    print preamble % (len(array), len(array))
     if opts.noreturn:
         print " ".join(array)
     else:

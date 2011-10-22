@@ -19,6 +19,8 @@
   * track_utils.h
   */
 
+#define TRACK_LENGTH 300
+
  const unsigned char race_track[300] PROGMEM = {
     0b11001111,
     0b10001111,
