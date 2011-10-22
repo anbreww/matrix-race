@@ -4,10 +4,10 @@
 // Provides basic functions to use the LED matrix module
 */
 
-#define M_OFF 0
-#define RED 1
-#define GREEN 2
-#define BLUE 3
+#define M_OFF   0
+#define M_RED   1
+#define M_GREEN 2
+#define M_ORANGE 3
 
 //! Initialisation functions
 void init_matrix(void);
@@ -38,3 +38,8 @@ void matrix_clear(void);
 // 32 bytes : 6.25 % - seems acceptable
 
 void matrix_set_line(uint8_t line_id, uint8_t values, uint8_t colour);
+
+// temporary test function
+void matrix_test(void);
+
+void switch_buffers(void);
