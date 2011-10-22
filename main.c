@@ -11,8 +11,11 @@
 #include "matrix/matrix.h"
 #include "race/track.h"
 #include <util/delay.h>
+#include <avr/interrupt.h>
 
 volatile uint8_t car_pos = 0;
+//volatile uint16_t frame_delay = 100;
+
 uint8_t track_pos = 0; // tracks up to 256 lines
 
 void game_init(void);
@@ -30,23 +33,6 @@ int main(void)
     init_matrix();
 
     uint16_t frame_counter = 0;
-    // matrix test routine
-    /*
-    while(1)
-    {
-        // do something
-        matrix_test();
-        _delay_ms(1);
-
-
-        frame_counter++;
-        if(frame_counter == 1500)
-        {
-            switch_buffers();
-            frame_counter = 0;
-        }
-    }
-    */
 
     /*
      * BEGINNING OF GAME - inits
@@ -81,7 +67,7 @@ int main(void)
         // redraw screen
         //switch_buffers();
         frame_counter++;
-        if(frame_counter == 30)
+        if(frame_counter == 100)
         {
             switch_buffers();
             frame_counter = 0;
@@ -105,12 +91,56 @@ void game_init(void)
 void setup_interrupts(void)
 {
     // interrupts for left and right buttons
+    PCICR |= (1<<PCIE3);
+
+    PCMSK3 |= (1<<PCINT26);
+    PCMSK3 |= (1<<PCINT27);
+    PCMSK3 |= (1<<PCINT30);
+    PCMSK3 |= (1<<PCINT31);
+    sei();
     // timers for display refreshing and score counting?
         return;
+}
+
+void move_car_right(void)
+{
+    if(car_pos > 0x01)
+        car_pos >>= 1;
+    else
+        car_pos = 0x01;
+}
+
+void move_car_left(void)
+{
+    if(car_pos < 0x80)
+        car_pos <<= 1;
+    else
+        car_pos = 0x80;
 }
 
 // interrupt routine for buttons
 ISR(PCINT3_vect)
 {
-    // blah
+    DDRD = 0x00;
+
+    uint8_t input = PIND;
+
+    if((input & _BV(2)) == 0)
+    {
+        move_car_left();
+    }
+    else if((input & _BV(7)) == 0)
+    {
+        move_car_right();
+    }
+    /*
+    if((input & _BV(3)) == 0)
+    {
+        frame_delay -= 10;
+    }
+    if((input & _BV(6)) == 0)
+    {
+        frame_delay += 10;
+    }
+    */
 }

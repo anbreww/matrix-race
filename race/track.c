@@ -14,7 +14,7 @@ void track_increment_position(void)
 {
     _start_position++;
     if(_start_position > TRACK_LENGTH)
-        _start_position = 0a
+        _start_position = 0;
 }
 
 #define LOAD(_position)  pgm_read_byte_near(&race_track[_position]);
