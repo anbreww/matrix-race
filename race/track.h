@@ -1,8 +1,11 @@
-/******************************
+/**
+ * @file    track.h
+ * @author  Andrew Watson (andy@watsons.ch)
+ * @brief   Functions for advancing the track and loading segments into memory.
+ * @date    October 2011
+ * @version 0.1
  *
- *  Track file for the race game
- *
- ******************************/
+ */
 
 // define track in flash
 

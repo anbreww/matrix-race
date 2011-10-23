@@ -219,6 +219,9 @@ stats: $(TRG)
 
 hex: $(HEXTRG)
 
+doc:
+	doxygen Doxyfile
+
 
 writeflash: hex
 	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMERID)   \

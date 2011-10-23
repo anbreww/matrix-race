@@ -1,9 +1,16 @@
-/***********************************
+/**
+ * @file    main.c
+ * @author  Andrew Watson (andy@watsons.ch)
+ * @brief   A simple car race for Robopoly's LED matrix module.
+ * @date    October 2011
+ * @version 0.1
  *
- *  LED Matrix Racing Game
- *  Andrew Watson 2011
- *  
- **********************************/
+ * This fairly simple example should provide you with a base if you wish to
+ * begin developing applications for the LED matrix module that I made for the
+ * PRisme2 platform. The main file contains the game logic. This project also
+ * contains separate files to house the matrix write and refresh functions, as
+ * well as handle advancing and generating pieces of track.
+ */
 
 #define F_CPU 14745600
 
@@ -118,6 +125,9 @@ void move_car_left(void)
         car_pos = 0x80;
 }
 
+/**
+ * @todo Replace button values with more meaningful names 
+ */
 // interrupt routine for buttons
 ISR(PCINT3_vect)
 {
