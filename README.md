@@ -17,6 +17,6 @@ other controls TBD (controls during pause and after the end of the game).
 
 ## URLs
 
-This project is hosted at `https://github.com/tunebird/matrix-race`
+This project is hosted at https://github.com/tunebird/matrix-race
 
-You can browse the documentation at `http://tunebird.github.com/matrix-race`
+You can browse the documentation at http://tunebird.github.com/matrix-race
