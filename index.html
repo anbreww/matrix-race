@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Matrix-Race: Main Page</title>
+<title>Matrix-Race: LED Matrix Racing Game</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -27,7 +27,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Matrix-Race
-   &#160;<span id="projectnumber">01</span>
+   &#160;<span id="projectnumber">v0.1</span>
    </div>
    <div id="projectbrief">A race game for the Robopoly matrix module.</div>
   </td>
@@ -71,10 +71,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Matrix-Race Documentation</div>  </div>
+<div class="title">LED Matrix Racing Game </div>  </div>
 </div>
 <div class="contents">
-</div>
+<div class="textblock"><dl class="author"><dt><b>Author:</b></dt><dd>Andrew Watson (<a href="mailto:andy@watsons.ch">andy@watsons.ch</a>)</dd></dl>
+<dl class="date"><dt><b>Date:</b></dt><dd>October 2011</dd></dl>
+<h2><a class="anchor" id="intro"></a>
+Description</h2>
+<p>This project is a simple game to be played on an 8x8 bi-color LED matrix. It is designed for Robopoly's LED Matrix Module, which was also designed by Andrew Watson. This module features a two-colour LED matrix in the centre of a shield that plugs on top of the PRisme microcontroller platform, surrounded by four tactile switches.</p>
+<p>Using the two bottom-most switches, the user moves a "car" (symbolized by a red dot on the bottom line of the matrix) through a scrolling circuit (made of green dots). It is meant primarily as a demo for those who wish to get started using the LED matrix library which ships with this demo.</p>
+<h2><a class="anchor" id="controls"></a>
+Controls</h2>
+<p>Buttons 1 and 4 (bottom left and bottom right) move the car left and right. The functionality of the other buttons has not been decided yet. The options I am considering at the moment are:</p>
+<ol type="1">
+<li>Pause button</li>
+<li>Increase/decrease game speed</li>
+<li>Move car up/down on the screen, thus changing the score and difficulty.</li>
+</ol>
+<h2><a class="anchor" id="hosting"></a>
+Project location</h2>
+<p>The code for this demo is currently hosted on <a href="https://github.com/tunebird/matrix-race">github</a>.</p>
+<p>The present documentation files are hosted as <a href="http://tunebird.github.com/matrix-race">github pages</a>.</p>
+<p>Documentation and design files for the hardware, as well as links to available demos and libraries, can be found at the <a href="http://wiki.robopoly.ch/w/Matrice_Bicolore">Robopoly Wiki</a>. </p>
+</div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -92,7 +111,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 24 2011 17:18:21 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 24 2011 17:38:57 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
