@@ -91,14 +91,11 @@ Include dependency graph for matrix.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="matrix_8c__incl.png" border="0" usemap="#matrix_2matrix_8c" alt=""/></div>
 <map name="matrix_2matrix_8c" id="matrix_2matrix_8c">
-<area shape="rect" id="node5" href="matrix_8h.html" title="Functions to draw stuff in the buffer." alt="" coords="92,80,161,107"/></map>
+<area shape="rect" id="node5" href="matrix_8h.html" title="Functions to draw stuff in the matrix buffer." alt="" coords="92,80,161,107"/></map>
 </div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#ac06e38bd44dec45283f4e58e14a11ab9">ANODE_PORT</a>&#160;&#160;&#160;PORTA</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a83a0bc04703c97ae283079a399a47cc1">RED_PORT</a>&#160;&#160;&#160;PORTB</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a900bbec351c7a1acd783a1bb9b97b11d">GREEN_PORT</a>&#160;&#160;&#160;PORTC</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#aa327f246be5e5bbcf38e1f834955192b">draw_buffer</a>&#160;&#160;&#160;(1-<a class="el" href="matrix_8c.html#a956716875b19cb3e39028050665c4981">_active_buffer</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#aaf90fac7eee2dea3a43af17a58e89763">disp_buffer</a>&#160;&#160;&#160;(<a class="el" href="matrix_8c.html#a956716875b19cb3e39028050665c4981">_active_buffer</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a69423dee7f2ed3e68d6b3aab3cced4a2">BITMASK_AND</a>&#160;&#160;&#160;1</td></tr>
@@ -107,16 +104,24 @@ Defines</h2></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4">_display_next_line</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">load the next line from the buffer and display it  <a href="#a6fcb2d570fa5cf0fa60e9d2f0ec47db4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a8435e35d383d757f077555265f509c95">matrix_test</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">temporary test function  <a href="#a8435e35d383d757f077555265f509c95"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a24a2e20d62ec1206c2833f140720d852">init_matrix</a> (void)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisation functions.  <a href="#a24a2e20d62ec1206c2833f140720d852"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d">matrix_clear</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears entire buffer.  <a href="#a69259b2d664eefc2c476f7bc334e919d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81">matrix_set_line</a> (uint8_t line_id, uint8_t values, uint8_t colour)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pixels of a given line.  <a href="#a5a28f10819ed671455227f505a04ed81"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a3723c52625f8dc2873e7c307e3686508">_matrix_bitmask</a> (uint8_t line_id, uint8_t values, uint8_t colour, uint8_t function)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a2e177ede912420218593e39341fe7299">switch_buffers</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch buffers around.  <a href="#a2e177ede912420218593e39341fe7299"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026">flip_bits</a> (uint8_t _byte)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">flips the order of bits in a byte  <a href="#a6c9a976a0a6f85666c2dde7b471f3026"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#ac53875d2fe37830e90522c3ae546fc1a">line_callback</a> (uint8_t line_pos)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback to be called after every line refresh.  <a href="#ac53875d2fe37830e90522c3ae546fc1a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#acbd48f05cf98fcb70a572e0ccf66d0e4">frame_callback</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback to be called at the end of a frame.  <a href="#acbd48f05cf98fcb70a572e0ccf66d0e4"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#aebcf98832a09195d63942c672f4e8143">_green_buffer</a> [2][8]</td></tr>
@@ -124,19 +129,6 @@ Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a956716875b19cb3e39028050665c4981">_active_buffer</a> = 1</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="ac06e38bd44dec45283f4e58e14a11ab9"></a><!-- doxytag: member="matrix.c::ANODE_PORT" ref="ac06e38bd44dec45283f4e58e14a11ab9" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define ANODE_PORT&#160;&#160;&#160;PORTA</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a69423dee7f2ed3e68d6b3aab3cced4a2"></a><!-- doxytag: member="matrix.c::BITMASK_AND" ref="a69423dee7f2ed3e68d6b3aab3cced4a2" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -202,32 +194,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a900bbec351c7a1acd783a1bb9b97b11d"></a><!-- doxytag: member="matrix.c::GREEN_PORT" ref="a900bbec351c7a1acd783a1bb9b97b11d" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define GREEN_PORT&#160;&#160;&#160;PORTC</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a83a0bc04703c97ae283079a399a47cc1"></a><!-- doxytag: member="matrix.c::RED_PORT" ref="a83a0bc04703c97ae283079a399a47cc1" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define RED_PORT&#160;&#160;&#160;PORTB</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a6fcb2d570fa5cf0fa60e9d2f0ec47db4"></a><!-- doxytag: member="matrix.c::_display_next_line" ref="a6fcb2d570fa5cf0fa60e9d2f0ec47db4" args="(void)" -->
 <div class="memitem">
@@ -243,15 +209,18 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>load the next line from the buffer and display it </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>call this function on a 800 Hz timer </dd></dl>
 <div class="fragment"><pre class="fragment">{
     <span class="keyword">static</span> uint8_t line_pos = 0;
 
     <span class="comment">// set anodes corresponding to current line</span>
-    <a class="code" href="matrix_8c.html#ac06e38bd44dec45283f4e58e14a11ab9">ANODE_PORT</a> = ~_BV(line_pos);
+    <a class="code" href="matrix_8h.html#ac06e38bd44dec45283f4e58e14a11ab9" title="Anode port is active low.">ANODE_PORT</a> = ~_BV(line_pos);
 
     <span class="comment">// load a line from the buffer and display it</span>
-    <a class="code" href="matrix_8c.html#a900bbec351c7a1acd783a1bb9b97b11d">GREEN_PORT</a> = <a class="code" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026">flip_bits</a>(<a class="code" href="matrix_8c.html#aebcf98832a09195d63942c672f4e8143">_green_buffer</a>[<a class="code" href="matrix_8c.html#a956716875b19cb3e39028050665c4981">_active_buffer</a>][line_pos]);
-    <a class="code" href="matrix_8c.html#a83a0bc04703c97ae283079a399a47cc1">RED_PORT</a> =   <a class="code" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026">flip_bits</a>(  <a class="code" href="matrix_8c.html#a2a2f62689c9e08fd4cca02b78f384cb7">_red_buffer</a>[<a class="code" href="matrix_8c.html#a956716875b19cb3e39028050665c4981">_active_buffer</a>][line_pos]);
+    <a class="code" href="matrix_8h.html#a900bbec351c7a1acd783a1bb9b97b11d" title="Green cathodes (active high)">GREEN_PORT</a> = <a class="code" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flips the order of bits in a byte">flip_bits</a>(<a class="code" href="matrix_8c.html#aebcf98832a09195d63942c672f4e8143">_green_buffer</a>[<a class="code" href="matrix_8c.html#a956716875b19cb3e39028050665c4981">_active_buffer</a>][line_pos]);
+    <a class="code" href="matrix_8h.html#a83a0bc04703c97ae283079a399a47cc1" title="Red cathodes (active high)">RED_PORT</a> =   <a class="code" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flips the order of bits in a byte">flip_bits</a>(  <a class="code" href="matrix_8c.html#a2a2f62689c9e08fd4cca02b78f384cb7">_red_buffer</a>[<a class="code" href="matrix_8c.html#a956716875b19cb3e39028050665c4981">_active_buffer</a>][line_pos]);
 
     line_pos++;
     <span class="comment">// call line_callback(line_pos);</span>
@@ -269,7 +238,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="matrix_8c_a6fcb2d570fa5cf0fa60e9d2f0ec47db4_cgraph.png" border="0" usemap="#matrix_8c_a6fcb2d570fa5cf0fa60e9d2f0ec47db4_cgraph" alt=""/></div>
 <map name="matrix_8c_a6fcb2d570fa5cf0fa60e9d2f0ec47db4_cgraph" id="matrix_8c_a6fcb2d570fa5cf0fa60e9d2f0ec47db4_cgraph">
-<area shape="rect" id="node3" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flip_bits" alt="" coords="184,5,251,32"/></map>
+<area shape="rect" id="node3" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flips the order of bits in a byte" alt="" coords="184,5,251,32"/></map>
 </div>
 </p>
 
@@ -351,6 +320,9 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>flips the order of bits in a byte </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>this function is crap. re-implement in assembler! </dd></dl>
 <div class="fragment"><pre class="fragment">{
     uint8_t i, output=0;
     uint8_t mask = 0b00000001;
@@ -383,6 +355,9 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Callback to be called at the end of a frame. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>replace this function with a pointer to a callback </dd></dl>
 <div class="fragment"><pre class="fragment">{
     <span class="keyword">static</span> uint16_t frame_counter = 0;
     <span class="comment">// this function will be called at the end of every frame</span>
@@ -409,6 +384,8 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 
 <p>Initialisation functions. </p>
+<p>Sets port directions</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>add timer initializations to this function </dd></dl>
 <div class="fragment"><pre class="fragment">{
     DDRA = 0xFF;
     DDRB = 0xFF;
@@ -433,6 +410,15 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Callback to be called after every line refresh. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line_pos</td><td>current line (0-7) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>replace this function with a pointer to a callback </dd></dl>
 <div class="fragment"><pre class="fragment">{
     <span class="comment">// this function will be called after every line</span>
     <span class="keywordflow">return</span>;
@@ -454,6 +440,9 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Clears entire buffer. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>implement this function </dd></dl>
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">return</span>;
 }
@@ -490,28 +479,16 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Functions to draw on the matrix. What do we want to be able to do?</p>
-<ol type="1">
-<li>Use function 5 (bitmask) for the low level part.</li>
-<li>Clear the whole matrix</li>
-<li>Clear only one colour</li>
-<li>Set a pixel to a given colour, regardless of what colour it is</li>
-<li>Toggle a pixel (green/off, red/off, red/green)<ol type="a">
-<li>What happens if a pixel is green and we want to toggle red-off?</li>
-<li>Does it go green-red-off-red, green-off-red-off or green-orange..?</li>
-</ol>
-</li>
-<li>Bitmasks on a line (and, or, xor)<ol type="a">
-<li>one mask for green, one mask for red</li>
-</ol>
-</li>
-<li>read pixels of a line (red or green), returns uint8</li>
-<li>read a pixel (returns OFF, RED, GREEN)</li>
-</ol>
-<ol type="1">
-<li>optional : provide the same functionality as lines on the columns</li>
-<li>to think about : do this directly, or double-buffer? </li>
-</ol>
+
+<p>Set the pixels of a given line. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line_id</td><td>Matrix line (0 = bottom, 7 = top) </td></tr>
+    <tr><td class="paramname">values</td><td>One byte containing pixel values </td></tr>
+    <tr><td class="paramname">colour</td><td>Can be either M_RED, M_RED or M_ORANGE </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><pre class="fragment">{
     <span class="comment">// since orange == 3, this covers all cases</span>
     <span class="keywordflow">if</span>(colour &amp; <a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>)
@@ -541,8 +518,10 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>temporary test function </p>
 <div class="fragment"><pre class="fragment">{
-    <a class="code" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4">_display_next_line</a>();
+    <a class="code" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it">_display_next_line</a>();
 }
 </pre></div>
 <p><div class="dynheader">
@@ -550,7 +529,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="matrix_8c_a8435e35d383d757f077555265f509c95_cgraph.png" border="0" usemap="#matrix_8c_a8435e35d383d757f077555265f509c95_cgraph" alt=""/></div>
 <map name="matrix_8c_a8435e35d383d757f077555265f509c95_cgraph" id="matrix_8c_a8435e35d383d757f077555265f509c95_cgraph">
-<area shape="rect" id="node3" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="_display_next_line" alt="" coords="142,5,271,32"/><area shape="rect" id="node5" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flip_bits" alt="" coords="320,5,387,32"/></map>
+<area shape="rect" id="node3" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it" alt="" coords="142,5,271,32"/><area shape="rect" id="node5" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flips the order of bits in a byte" alt="" coords="320,5,387,32"/></map>
 </div>
 </p>
 
@@ -570,6 +549,9 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Switch buffers around. </p>
+<p>You might want to be careful when calling this function, to do it at the end of a frame, to avoid glitches. </p>
 <div class="fragment"><pre class="fragment">{
     <a class="code" href="matrix_8c.html#a956716875b19cb3e39028050665c4981">_active_buffer</a> ^= 1;
 }
@@ -622,7 +604,8 @@ Here is the call graph for this function:</div>
         0b00000000
     }
 }
-</pre></div>
+</pre></div><p>for double-buffering, let's store two tables of 8x8 pixels in RAM </p>
+
 </div>
 </div>
 <a class="anchor" id="a2a2f62689c9e08fd4cca02b78f384cb7"></a><!-- doxytag: member="matrix.c::_red_buffer" ref="a2a2f62689c9e08fd4cca02b78f384cb7" args="[2][8]" -->
@@ -678,7 +661,7 @@ Here is the call graph for this function:</div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 24 2011 01:32:06 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 24 2011 02:25:31 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

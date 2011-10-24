@@ -98,7 +98,7 @@ Include dependency graph for main.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8c__incl.png" border="0" usemap="#main_8c" alt=""/></div>
 <map name="main_8c" id="main_8c">
-<area shape="rect" id="node5" href="matrix_8h.html" title="Functions to draw stuff in the buffer." alt="" coords="92,80,201,107"/><area shape="rect" id="node7" href="track_8h.html" title="Functions for advancing the track and loading segments into memory." alt="" coords="225,80,316,107"/></map>
+<area shape="rect" id="node5" href="matrix_8h.html" title="Functions to draw stuff in the matrix buffer." alt="" coords="92,80,201,107"/><area shape="rect" id="node7" href="track_8h.html" title="Functions for advancing the track and loading segments into memory." alt="" coords="225,80,316,107"/></map>
 </div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
@@ -251,10 +251,10 @@ Here is the call graph for this function:</div>
     {
         <span class="comment">// reset display</span>
         <span class="comment">//matrix_clear();</span>
-        <a class="code" href="matrix_8c.html#a8435e35d383d757f077555265f509c95">matrix_test</a>();
+        <a class="code" href="matrix_8c.html#a8435e35d383d757f077555265f509c95" title="temporary test function">matrix_test</a>();
 
         <span class="comment">// display car</span>
-        <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81">matrix_set_line</a>(0,<a class="code" href="main_8c.html#a648b2326fe25ce77ab38e954188c1445">car_pos</a>,<a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>); <span class="comment">// set bottom line with one red dot</span>
+        <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(0,<a class="code" href="main_8c.html#a648b2326fe25ce77ab38e954188c1445">car_pos</a>,<a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>); <span class="comment">// set bottom line with one red dot</span>
 
         uint8_t i;
         <span class="comment">// load 8 track segments</span>
@@ -262,9 +262,9 @@ Here is the call graph for this function:</div>
         {
             uint8_t <a class="code" href="namespaceimgtohashes.html#a13ae02c4c2a4e3e79f7de35380e34f19">line</a> = 0;
             <span class="comment">// load segment</span>
-            line = <a class="code" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4">track_load_line</a>(i);
+            line = <a class="code" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory.">track_load_line</a>(i);
 
-            <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81">matrix_set_line</a>(i,line,<a class="code" href="matrix_8h.html#a80b0a7cdacdac141d4b98dafabbd0caa" title="Act on green buffer.">M_GREEN</a>);
+            <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(i,line,<a class="code" href="matrix_8h.html#a80b0a7cdacdac141d4b98dafabbd0caa" title="Act on green buffer.">M_GREEN</a>);
         }
         _delay_ms(1);
 
@@ -273,9 +273,9 @@ Here is the call graph for this function:</div>
         frame_counter++;
         <span class="keywordflow">if</span>(frame_counter == 100)
         {
-            <a class="code" href="matrix_8c.html#a2e177ede912420218593e39341fe7299">switch_buffers</a>();
+            <a class="code" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around.">switch_buffers</a>();
             frame_counter = 0;
-            <a class="code" href="track_8c.html#ac26da6e1020a3591bec0b53c99c82e27">track_increment_position</a>();
+            <a class="code" href="track_8c.html#ac26da6e1020a3591bec0b53c99c82e27" title="Move forward in the track.">track_increment_position</a>();
         }
     }
 
@@ -288,7 +288,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph.png" border="0" usemap="#main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" alt=""/></div>
 <map name="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" id="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph">
-<area shape="rect" id="node3" href="matrix_8c.html#a24a2e20d62ec1206c2833f140720d852" title="Initialisation functions." alt="" coords="147,5,229,32"/><area shape="rect" id="node5" href="main_8c.html#afe35a1f8874f44c04acfdec83ef9ef8e" title="game_init" alt="" coords="149,56,227,83"/><area shape="rect" id="node7" href="main_8c.html#a38cf15499a4186845b5d0b03bb6d12e1" title="setup_interrupts" alt="" coords="131,107,245,133"/><area shape="rect" id="node9" href="matrix_8c.html#a8435e35d383d757f077555265f509c95" title="matrix_test" alt="" coords="145,157,231,184"/><area shape="rect" id="node15" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="matrix_set_line" alt="" coords="133,208,243,235"/><area shape="rect" id="node17" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="track_load_line" alt="" coords="133,259,243,285"/><area shape="rect" id="node19" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="switch_buffers" alt="" coords="136,309,240,336"/><area shape="rect" id="node21" href="track_8c.html#ac26da6e1020a3591bec0b53c99c82e27" title="track_increment_position" alt="" coords="105,360,271,387"/><area shape="rect" id="node11" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="_display_next_line" alt="" coords="321,157,450,184"/><area shape="rect" id="node13" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flip_bits" alt="" coords="499,157,565,184"/></map>
+<area shape="rect" id="node3" href="matrix_8c.html#a24a2e20d62ec1206c2833f140720d852" title="Initialisation functions." alt="" coords="147,5,229,32"/><area shape="rect" id="node5" href="main_8c.html#afe35a1f8874f44c04acfdec83ef9ef8e" title="game_init" alt="" coords="149,56,227,83"/><area shape="rect" id="node7" href="main_8c.html#a38cf15499a4186845b5d0b03bb6d12e1" title="setup_interrupts" alt="" coords="131,107,245,133"/><area shape="rect" id="node9" href="matrix_8c.html#a8435e35d383d757f077555265f509c95" title="temporary test function" alt="" coords="145,157,231,184"/><area shape="rect" id="node15" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line." alt="" coords="133,208,243,235"/><area shape="rect" id="node17" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory." alt="" coords="133,259,243,285"/><area shape="rect" id="node19" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around." alt="" coords="136,309,240,336"/><area shape="rect" id="node21" href="track_8c.html#ac26da6e1020a3591bec0b53c99c82e27" title="Move forward in the track." alt="" coords="105,360,271,387"/><area shape="rect" id="node11" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it" alt="" coords="321,157,450,184"/><area shape="rect" id="node13" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flips the order of bits in a byte" alt="" coords="499,157,565,184"/></map>
 </div>
 </p>
 
@@ -427,7 +427,7 @@ Here is the call graph for this function:</div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 24 2011 01:32:06 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 24 2011 02:25:31 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

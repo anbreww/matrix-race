@@ -102,7 +102,9 @@ Defines</h2></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="track_8c.html#ac26da6e1020a3591bec0b53c99c82e27">track_increment_position</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Move forward in the track.  <a href="#ac26da6e1020a3591bec0b53c99c82e27"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4">track_load_line</a> (uint8_t _line)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a line from the track stored in program memory.  <a href="#a9b84887c7ed996512787ac66954ce8a4"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="track_8c.html#ad27db67ab1d130b0b38c8a65d234073e">_start_position</a> = 0</td></tr>
@@ -140,6 +142,9 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Move forward in the track. </p>
+<p>This function automatically keeps track of the length of the race track, and will wrap around the end when needed. You only need to make sure that the first and last piece of track are compatible or the gameplay will be a little... surprising! </p>
 <div class="fragment"><pre class="fragment">{
     <a class="code" href="track_8c.html#ad27db67ab1d130b0b38c8a65d234073e">_start_position</a>++;
     <span class="keywordflow">if</span>(<a class="code" href="track_8c.html#ad27db67ab1d130b0b38c8a65d234073e">_start_position</a> &gt; <a class="code" href="track-0_8h.html#a0cdb012fb838632cd67313d3d78ae497">TRACK_LENGTH</a>)
@@ -162,6 +167,16 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Load a line from the track stored in program memory. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_line</td><td>position of the line, from the current starting position</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>one byte containing the pixels for the line requested.</dd></dl>
+<p>This function also keeps track of line length, and will wrap around the end of the track. If for example the track is 300 lines long and you ask for line 302, it will return line number 2. <em>_line</em> should be between 0 and 7 normally, for the 8x8 led matrix. </p>
 <div class="fragment"><pre class="fragment">{
     uint8_t result = 0;
 
@@ -211,7 +226,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 24 2011 01:32:06 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 24 2011 02:25:31 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

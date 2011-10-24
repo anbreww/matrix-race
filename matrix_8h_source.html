@@ -80,30 +80,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <a href="matrix_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00007"></a><a class="code" href="matrix_8h.html#a01814ddfd45a413b8666a758b9ef8f4e">00007</a> <span class="preprocessor">#define M_OFF   0   //!&lt; not used</span>
-<a name="l00008"></a><a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905">00008</a> <span class="preprocessor"></span><span class="preprocessor">#define M_RED   1   //!&lt; Act on red buffer</span>
-<a name="l00009"></a><a class="code" href="matrix_8h.html#a80b0a7cdacdac141d4b98dafabbd0caa">00009</a> <span class="preprocessor"></span><span class="preprocessor">#define M_GREEN 2   //!&lt; Act on green buffer</span>
-<a name="l00010"></a><a class="code" href="matrix_8h.html#a48e12e9261c90421defa7c74a91d4941">00010</a> <span class="preprocessor"></span><span class="preprocessor">#define M_ORANGE 3  //!&lt; Act on both buffers</span>
-<a name="l00011"></a>00011 <span class="preprocessor"></span>
-<a name="l00012"></a><a class="code" href="matrix_8h.html#ac06e38bd44dec45283f4e58e14a11ab9">00012</a> <span class="preprocessor">#define ANODE_PORT  PORTA   //!&lt; Anode port is active low</span>
-<a name="l00013"></a><a class="code" href="matrix_8h.html#a1b69efd31faf5c07a71d692513ae3007">00013</a> <span class="preprocessor"></span><span class="preprocessor">#define ANODE_DDR   DDRA</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span>
-<a name="l00015"></a><a class="code" href="matrix_8h.html#a83a0bc04703c97ae283079a399a47cc1">00015</a> <span class="preprocessor">#define RED_PORT    PORTB   //!&lt; Red cathodes (active high)</span>
-<a name="l00016"></a><a class="code" href="matrix_8h.html#a900bbec351c7a1acd783a1bb9b97b11d">00016</a> <span class="preprocessor"></span><span class="preprocessor">#define GREEN_PORT  PORTC   //!&lt; Green cathodes (active high)</span>
-<a name="l00017"></a><a class="code" href="matrix_8h.html#af6f3b640cb9bb9202423119ac4a10610">00017</a> <span class="preprocessor"></span><span class="preprocessor">#define RED_DDR     DDRB</span>
-<a name="l00018"></a><a class="code" href="matrix_8h.html#adddb05ced3a14154ef548ff39ce30035">00018</a> <span class="preprocessor"></span><span class="preprocessor">#define GREEN_DDR   DDRC</span>
-<a name="l00019"></a>00019 <span class="preprocessor"></span>
-<a name="l00020"></a>00020 
-<a name="l00022"></a>00022 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a24a2e20d62ec1206c2833f140720d852" title="Initialisation functions.">init_matrix</a>(<span class="keywordtype">void</span>);
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d">matrix_clear</a>(<span class="keywordtype">void</span>);
-<a name="l00025"></a>00025 
-<a name="l00046"></a>00046 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81">matrix_set_line</a>(uint8_t line_id, uint8_t values, uint8_t colour);
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048 <span class="comment">// temporary test function</span>
-<a name="l00049"></a>00049 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a8435e35d383d757f077555265f509c95">matrix_test</a>(<span class="keywordtype">void</span>);
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a2e177ede912420218593e39341fe7299">switch_buffers</a>(<span class="keywordtype">void</span>);
+<a name="l00025"></a><a class="code" href="matrix_8h.html#a01814ddfd45a413b8666a758b9ef8f4e">00025</a> <span class="preprocessor">#define M_OFF   0   //!&lt; not used</span>
+<a name="l00026"></a><a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905">00026</a> <span class="preprocessor"></span><span class="preprocessor">#define M_RED   1   //!&lt; Act on red buffer</span>
+<a name="l00027"></a><a class="code" href="matrix_8h.html#a80b0a7cdacdac141d4b98dafabbd0caa">00027</a> <span class="preprocessor"></span><span class="preprocessor">#define M_GREEN 2   //!&lt; Act on green buffer</span>
+<a name="l00028"></a><a class="code" href="matrix_8h.html#a48e12e9261c90421defa7c74a91d4941">00028</a> <span class="preprocessor"></span><span class="preprocessor">#define M_ORANGE 3  //!&lt; Act on both buffers</span>
+<a name="l00029"></a>00029 <span class="preprocessor"></span>
+<a name="l00030"></a><a class="code" href="matrix_8h.html#ac06e38bd44dec45283f4e58e14a11ab9">00030</a> <span class="preprocessor">#define ANODE_PORT  PORTA   //!&lt; Anode port is active low</span>
+<a name="l00031"></a><a class="code" href="matrix_8h.html#a1b69efd31faf5c07a71d692513ae3007">00031</a> <span class="preprocessor"></span><span class="preprocessor">#define ANODE_DDR   DDRA</span>
+<a name="l00032"></a>00032 <span class="preprocessor"></span>
+<a name="l00033"></a><a class="code" href="matrix_8h.html#a83a0bc04703c97ae283079a399a47cc1">00033</a> <span class="preprocessor">#define RED_PORT    PORTB   //!&lt; Red cathodes (active high)</span>
+<a name="l00034"></a><a class="code" href="matrix_8h.html#a900bbec351c7a1acd783a1bb9b97b11d">00034</a> <span class="preprocessor"></span><span class="preprocessor">#define GREEN_PORT  PORTC   //!&lt; Green cathodes (active high)</span>
+<a name="l00035"></a><a class="code" href="matrix_8h.html#af6f3b640cb9bb9202423119ac4a10610">00035</a> <span class="preprocessor"></span><span class="preprocessor">#define RED_DDR     DDRB</span>
+<a name="l00036"></a><a class="code" href="matrix_8h.html#adddb05ced3a14154ef548ff39ce30035">00036</a> <span class="preprocessor"></span><span class="preprocessor">#define GREEN_DDR   DDRC</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span>
+<a name="l00038"></a>00038 
+<a name="l00044"></a>00044 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a24a2e20d62ec1206c2833f140720d852" title="Initialisation functions.">init_matrix</a>(<span class="keywordtype">void</span>);
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 
+<a name="l00052"></a>00052 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer.">matrix_clear</a>(<span class="keywordtype">void</span>);
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 
+<a name="l00062"></a>00062 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(uint8_t line_id, uint8_t values, uint8_t colour);
+<a name="l00063"></a>00063 
+<a name="l00067"></a>00067 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a8435e35d383d757f077555265f509c95" title="temporary test function">matrix_test</a>(<span class="keywordtype">void</span>);
+<a name="l00068"></a>00068 
+<a name="l00075"></a>00075 <span class="keywordtype">void</span> <a class="code" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around.">switch_buffers</a>(<span class="keywordtype">void</span>);
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -123,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 24 2011 01:32:06 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 24 2011 02:25:31 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
