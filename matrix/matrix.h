@@ -35,11 +35,26 @@
 #define RED_DDR     DDRB
 #define GREEN_DDR   DDRC
 
+#define BUTTON_DDR  DDRD    
+#define BUTTON_PORT PORTD   //!< Buttons are active low!
+#define BUTTON_PIN  PIND
+
+#define BTN_1   2
+#define BTN_2   3
+#define BTN_3   6
+#define BTN_4   7
+
+/**
+ * \def BUTTON_PRESSED(button)
+ *
+ * Tells you if \a button is currently pressed
+ *
+ * @returns 1 if true, 0 otherwise
+ */
+#define BUTTON_PRESSED(button)  ((BUTTON_PIN & _BV(button)) == 0)
 
 /**
  * Sets port directions
- *
- * @todo    add timer initializations to this function
  */
 void init_matrix(void);
 

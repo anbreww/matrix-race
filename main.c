@@ -53,8 +53,7 @@ int main(void)
     while(flags.game_running == 1)
     {
         // reset display
-        //matrix_clear();
-        matrix_test();
+        matrix_clear();
 
         // display car
         matrix_set_line(0,car_pos,M_RED); // set bottom line with one red dot
@@ -95,6 +94,11 @@ void game_init(void)
     track_pos = 0;
 }
 
+/**
+ * @brief   Set up pin change interrupts for the buttons
+ *
+ * @todo    Move button interrupt logic into matrix file and register callbacks
+ */
 void setup_interrupts(void)
 {
     // interrupts for left and right buttons
@@ -109,6 +113,9 @@ void setup_interrupts(void)
         return;
 }
 
+/**
+ * @brief  Move the car to the right, stop if we hit the wall.
+ */
 void move_car_right(void)
 {
     if(car_pos > 0x01)
@@ -117,6 +124,10 @@ void move_car_right(void)
         car_pos = 0x01;
 }
 
+
+/**
+ * @brief  Move the car to the left, stop if we hit the wall.
+ */
 void move_car_left(void)
 {
     if(car_pos < 0x80)
@@ -126,20 +137,23 @@ void move_car_left(void)
 }
 
 /**
- * @todo Replace button values with more meaningful names 
+ * @brief Interrupt routine from buttons
+ *
+ * This routine is called on a pin change interrupt. It's incapable of
+ * differentiating between different buttons when it's called, so we decode the
+ * button presses inside the function. We'll also try to do some debouncing.
  */
-// interrupt routine for buttons
 ISR(PCINT3_vect)
 {
     DDRD = 0x00;
 
     uint8_t input = PIND;
 
-    if((input & _BV(2)) == 0)
+    if( BUTTON_PRESSED(BTN_1) )
     {
         move_car_left();
     }
-    else if((input & _BV(7)) == 0)
+    else if( BUTTON_PRESSED(BTN_4) )
     {
         move_car_right();
     }

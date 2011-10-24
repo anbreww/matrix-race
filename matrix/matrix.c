@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include "matrix.h"
+#include <avr/interrupt.h>
 
 void _display_next_line(void);
 
@@ -56,26 +57,74 @@ volatile uint8_t _active_buffer = 1;
 #define draw_buffer (1-_active_buffer)
 #define disp_buffer (_active_buffer)
 
-// temporary test function
-void matrix_test()
+
+// 800Hz timer compare match (with OCR0A)
+ISR(TIMER0_COMPA_vect)
 {
     _display_next_line();
+
+    // check frequency is right by toggling a bit every cycle
+    BUTTON_DDR |= 0x01;
+    BUTTON_PORT ^= 0x01;
 }
 
 
-//! Initialisation functions
+
+/**
+ * We want an 800Hz interrupt.
+ * in the documentation, Foc refers to the frequency of the output waveform.
+ * Since the output is toggled at every compare, the actual interrupt frequency
+ * is twice the frequency of the output compare waveform. Therefore, we only
+ * need foc = 400.
+ * \verbatim
+
+                 fclkio
+ foc_nx = -------------------
+          2 * N * (1 + OCRnx)
+ 
+  \endverbatim
+ *
+ * with fclkio = 14745600, we get
+ * \c N = 64 (prescaler) and
+ * \c OCRnx = 71 (compare value)
+ */
+
 void init_matrix(void)
 {
-    DDRA = 0xFF;
-    DDRB = 0xFF;
-    DDRC = 0xFF;
-    DDRD = 0x00;
+    /*
+     * set up I/O : LEDs as outputs, buttons as inputs
+     */
+    ANODE_DDR = 0xFF;
+    RED_DDR = 0xFF;
+    GREEN_DDR = 0xFF;
+    BUTTON_DDR = 0x00;
+
+    /*
+     * set up an 800 Hz timer to refresh lines.
+     */
+    TCCR0A = (0b10 << WGM00);   // Clear timer on compare, OCR0A
+    TCCR0B = (0 << WGM02);
+    TCCR0B = (0b100<<CS00);     // Prescaler = 64
+    OCR0A  = 71;                // Top limit for timer
+    TCNT0 = 0;                  // Just to make sure.
+
+    TIMSK0 |= (1<<OCIE0A);      // Enable compare interrupt on timer 0 A
+
+    sei();                      // Enable global interrupts
+
+
     return;
 }
 
 
 void matrix_clear(void)
 {
+    uint8_t i;
+    for(i=0; i<8; i++)
+    {
+        _red_buffer[draw_buffer][i] = 0;
+        _green_buffer[draw_buffer][i] = 0;
+    }
     return;
 }
 
@@ -185,8 +234,6 @@ void frame_callback(void)
 
 /**
  * @brief   load the next line from the buffer and display it
- *
- * @todo    call this function on a 800 Hz timer 
  */
 void _display_next_line(void)
 {
