@@ -26,12 +26,15 @@ volatile uint8_t car_pos = 0;
 uint8_t track_pos = 0; // tracks up to 256 lines
 
 void game_init(void);
+void game_start_sequence(void);
 void setup_interrupts(void);
+void check_for_collisions(void);
 
 volatile struct Flags {
         int game_running:1;
+        int collision:1;
         
-} flags;
+} game_flags;
 
 int main(void)
 {
@@ -46,11 +49,13 @@ int main(void)
      */
     game_init();
     setup_interrupts();
+
+    game_start_sequence();
         
-        flags.game_running = 1;
+        game_flags.game_running = 1;
 
     // Start loop
-    while(flags.game_running == 1)
+    while(game_flags.game_running == 1)
     {
         // reset display
         matrix_clear();
@@ -68,7 +73,18 @@ int main(void)
 
             matrix_set_line(i,line,M_GREEN);
         }
+
         _delay_ms(1);
+
+        check_for_collisions();
+        if (game_flags.collision == 1) {
+            // draw a **sadface**
+            matrix_set_line(6, 0b00100100, M_RED);
+            matrix_set_line(5, 0b00100100, M_RED);
+            matrix_set_line(3, 0b00011000, M_RED);
+            matrix_set_line(2, 0b00100100, M_RED);
+            matrix_set_line(1, 0b00000000, M_RED);
+        }
 
         // redraw screen
         //switch_buffers();
@@ -95,6 +111,49 @@ void game_init(void)
 }
 
 /**
+ * @brief  Start sequence : flashing lights!
+ */
+void game_start_sequence(void)
+{
+    // First step : a red square
+    matrix_clear();
+    matrix_set_line(3,0b11000000,M_RED);
+    matrix_set_line(4,0b11000000,M_RED);
+    switch_buffers();
+
+    _delay_ms(500);
+
+    // second step : two red squares
+    matrix_clear();
+    matrix_set_line(3,0b11011000,M_RED);
+    matrix_set_line(4,0b11011000,M_RED);
+    switch_buffers();
+
+    _delay_ms(500);
+
+    // third step : three red squares
+    matrix_clear();
+    matrix_set_line(3,0b11011011,M_RED);
+    matrix_set_line(4,0b11011011,M_RED);
+    switch_buffers();
+
+    _delay_ms(500);
+
+    // finally : all green
+    matrix_clear();
+    matrix_set_line(3,0b11011011,M_GREEN);
+    matrix_set_line(4,0b11011011,M_GREEN);
+    switch_buffers();
+
+    _delay_ms(500);
+
+    // and go!
+    return;
+}
+
+
+
+/**
  * @brief   Set up pin change interrupts for the buttons
  *
  * @todo    Move button interrupt logic into matrix file and register callbacks
@@ -113,6 +172,19 @@ void setup_interrupts(void)
         return;
 }
 
+void check_for_collisions(void)
+{
+    uint8_t track = track_load_line(0);
+    if( (car_pos & track) != 0)
+    {
+        // we have a collision!
+        game_flags.collision = 1;
+    } else {
+        game_flags.collision = 0;
+    }
+
+}
+
 /**
  * @brief  Move the car to the right, stop if we hit the wall.
  */
@@ -122,6 +194,8 @@ void move_car_right(void)
         car_pos >>= 1;
     else
         car_pos = 0x01;
+
+    check_for_collisions();
 }
 
 
@@ -134,6 +208,8 @@ void move_car_left(void)
         car_pos <<= 1;
     else
         car_pos = 0x80;
+
+    check_for_collisions();
 }
 
 /**
@@ -146,8 +222,6 @@ void move_car_left(void)
 ISR(PCINT3_vect)
 {
     DDRD = 0x00;
-
-    uint8_t input = PIND;
 
     if( BUTTON_PRESSED(BTN_1) )
     {
