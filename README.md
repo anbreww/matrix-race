@@ -15,3 +15,8 @@ buttons 2 and 3 (bottom left and bottom right) move the car left and right.
 button 4 pauses the game.
 other controls TBD (controls during pause and after the end of the game).
 
+## URLs
+
+This project is hosted at `https://github.com/tunebird/matrix-race`
+
+You can browse the documentation at `http://tunebird.github.com/matrix-race`
