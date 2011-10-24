@@ -1,7 +1,25 @@
 /**
- * @file    matrix.h
- * @author  Andrew Watson (andy@watsons.ch)
- * @brief   Functions to draw stuff in the buffer.
+ * @file matrix.h
+ * @brief  Functions to draw stuff in the matrix buffer
+ * @author Andrew Watson (andy@watsons.ch)
+ * @version 0.1
+ * @date 2011-10-24
+ *
+ *  What do we want to be able to do?
+ *  -# Use function 5 (bitmask) for the low level part.
+ *  -# Clear the whole matrix
+ *  -# Clear only one colour
+ *  -# Set a pixel to a given colour, regardless of what colour it is
+ *  -# Toggle a pixel (green/off, red/off, red/green)
+ *      -# What happens if a pixel is green and we want to toggle red-off?
+ *      -# Does it go green-red-off-red, green-off-red-off or green-orange..?
+ *  -# Bitmasks on a line (and, or, xor)
+ *      -# one mask for green, one mask for red
+ *  -# read pixels of a line (red or green), returns uint8
+ *  -# read a pixel (returns OFF, RED, GREEN)
+ *
+ *  -# optional : provide the same functionality as lines on the columns
+ *  -# to think about : do this directly, or double-buffer?
  */
 
 #define M_OFF   0   //!< not used
@@ -18,34 +36,40 @@
 #define GREEN_DDR   DDRC
 
 
-//! Initialisation functions
+/**
+ * Sets port directions
+ *
+ * @todo    add timer initializations to this function
+ */
 void init_matrix(void);
 
-void matrix_clear(void);
 
 /**
- *  Functions to draw on the matrix.
- *  What do we want to be able to do?
- *  -# Use function 5 (bitmask) for the low level part.
- *  -# Clear the whole matrix
- *  -# Clear only one colour
- *  -# Set a pixel to a given colour, regardless of what colour it is
- *  -# Toggle a pixel (green/off, red/off, red/green)
- *      -# What happens if a pixel is green and we want to toggle red-off?
- *      -# Does it go green-red-off-red, green-off-red-off or green-orange..?
- *  -# Bitmasks on a line (and, or, xor)
- *      -# one mask for green, one mask for red
- *  -# read pixels of a line (red or green), returns uint8
- *  -# read a pixel (returns OFF, RED, GREEN)
+ * @brief  Clears entire buffer
  *
- *  -# optional : provide the same functionality as lines on the columns
- *  -# to think about : do this directly, or double-buffer?
- *
+ * @todo    implement this function
  */
+void matrix_clear(void);
 
+
+/**
+ * @brief  Set the pixels of a given line
+ *
+ * @param line_id   Matrix line (0 = bottom, 7 = top)
+ * @param values    One byte containing pixel values
+ * @param colour    Can be either M_RED, M_RED or M_ORANGE
+ */
 void matrix_set_line(uint8_t line_id, uint8_t values, uint8_t colour);
 
-// temporary test function
+/**
+ * @brief  temporary test function
+ */
 void matrix_test(void);
 
+/**
+ * @brief  Switch buffers around.
+ *
+ * You might want to be careful when calling this function, to do it at the end
+ * of a frame, to avoid glitches.
+ */
 void switch_buffers(void);

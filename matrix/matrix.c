@@ -3,15 +3,9 @@
 
 void _display_next_line(void);
 
-// anode port is active low
-#define ANODE_PORT  PORTA
-
-// cathode ports are active high
-#define RED_PORT    PORTB
-#define GREEN_PORT  PORTC
-
-
-// for double-buffering, let's store two tables of 8x8 pixels in RAM
+/**
+ * for double-buffering, let's store two tables of 8x8 pixels in RAM
+ */
 uint8_t _green_buffer[2][8] = {
     {
         0b00001000,
@@ -133,18 +127,15 @@ void _matrix_bitmask(uint8_t line_id, uint8_t values,
 }
 
 
-/*
- * Only call this function at the end of a frame
- * or you may get strange results
- */
 void switch_buffers(void)
 {
     _active_buffer ^= 1;
 }
 
-// flip the order of bits in a byte
-/*
- * TODO : this function is crap. re-implement in assembler!
+/**
+ * @brief   flips the order of bits in a byte
+ *
+ * @todo    this function is crap. re-implement in assembler!
  */
 uint8_t flip_bits(uint8_t _byte)
 {
@@ -164,13 +155,24 @@ uint8_t flip_bits(uint8_t _byte)
 }
 
 // **** CALLBACKS ****
-// to be replaced by pointers to functions
+
+/**
+ * @brief  Callback to be called after every line refresh
+ *
+ * @param line_pos  current line (0-7)
+ * @todo    replace this function with a pointer to a callback
+ */
 void line_callback(uint8_t line_pos)
 {
     // this function will be called after every line
     return;
 }
 
+/**
+ * @brief  Callback to be called at the end of a frame
+ *
+ * @todo    replace this function with a pointer to a callback
+ */
 void frame_callback(void)
 {
     static uint16_t frame_counter = 0;
@@ -181,7 +183,11 @@ void frame_callback(void)
 }
 
 
-// low-level functions
+/**
+ * @brief   load the next line from the buffer and display it
+ *
+ * @todo    call this function on a 800 Hz timer 
+ */
 void _display_next_line(void)
 {
     static uint8_t line_pos = 0;
