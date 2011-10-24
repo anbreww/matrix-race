@@ -86,6 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><code>#include &lt;avr/io.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="matrix_8h_source.html">matrix.h</a>&quot;</code><br/>
+<code>#include &lt;avr/interrupt.h&gt;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for matrix.c:</div>
 <div class="dyncontent">
@@ -105,10 +106,8 @@ Defines</h2></td></tr>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4">_display_next_line</a> (void)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">load the next line from the buffer and display it  <a href="#a6fcb2d570fa5cf0fa60e9d2f0ec47db4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a8435e35d383d757f077555265f509c95">matrix_test</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">temporary test function  <a href="#a8435e35d383d757f077555265f509c95"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#aec43762dc86e029b395d4e5819192c2d">ISR</a> (TIMER0_COMPA_vect)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a24a2e20d62ec1206c2833f140720d852">init_matrix</a> (void)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisation functions.  <a href="#a24a2e20d62ec1206c2833f140720d852"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d">matrix_clear</a> (void)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears entire buffer.  <a href="#a69259b2d664eefc2c476f7bc334e919d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81">matrix_set_line</a> (uint8_t line_id, uint8_t values, uint8_t colour)</td></tr>
@@ -211,7 +210,6 @@ Variables</h2></td></tr>
 <div class="memdoc">
 
 <p>load the next line from the buffer and display it </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>call this function on a 800 Hz timer </dd></dl>
 <div class="fragment"><pre class="fragment">{
     <span class="keyword">static</span> uint8_t line_pos = 0;
 
@@ -382,18 +380,73 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+<p>We want an 800Hz interrupt. in the documentation, Foc refers to the frequency of the output waveform. Since the output is toggled at every compare, the actual interrupt frequency is twice the frequency of the output compare waveform. Therefore, we only need foc = 400. </p>
+<div class="fragment"><pre class="fragment">
 
-<p>Initialisation functions. </p>
-<p>Sets port directions</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>add timer initializations to this function </dd></dl>
+                 fclkio
+ foc_nx = -------------------
+          2 * N * (1 + OCRnx)
+ 
+  </pre></div><p>with fclkio = 14745600, we get <code>N</code> = 64 (prescaler) and <code>OCRnx</code> = 71 (compare value) </p>
 <div class="fragment"><pre class="fragment">{
-    DDRA = 0xFF;
-    DDRB = 0xFF;
-    DDRC = 0xFF;
-    DDRD = 0x00;
+    <span class="comment">/*</span>
+<span class="comment">     * set up I/O : LEDs as outputs, buttons as inputs</span>
+<span class="comment">     */</span>
+    <a class="code" href="matrix_8h.html#a1b69efd31faf5c07a71d692513ae3007">ANODE_DDR</a> = 0xFF;
+    <a class="code" href="matrix_8h.html#af6f3b640cb9bb9202423119ac4a10610">RED_DDR</a> = 0xFF;
+    <a class="code" href="matrix_8h.html#adddb05ced3a14154ef548ff39ce30035">GREEN_DDR</a> = 0xFF;
+    <a class="code" href="matrix_8h.html#ab798f60243a5bba94d99175e4c05d9c1">BUTTON_DDR</a> = 0x00;
+
+    <span class="comment">/*</span>
+<span class="comment">     * set up an 800 Hz timer to refresh lines.</span>
+<span class="comment">     */</span>
+    TCCR0A = (0b10 &lt;&lt; WGM00);   <span class="comment">// Clear timer on compare, OCR0A</span>
+    TCCR0B = (0 &lt;&lt; WGM02);
+    TCCR0B = (0b100&lt;&lt;CS00);     <span class="comment">// Prescaler = 64</span>
+    OCR0A  = 71;                <span class="comment">// Top limit for timer</span>
+    TCNT0 = 0;                  <span class="comment">// Just to make sure.</span>
+
+    TIMSK0 |= (1&lt;&lt;OCIE0A);      <span class="comment">// Enable compare interrupt on timer 0 A</span>
+
+    sei();                      <span class="comment">// Enable global interrupts</span>
+
+
     <span class="keywordflow">return</span>;
 }
 </pre></div>
+</div>
+</div>
+<a class="anchor" id="aec43762dc86e029b395d4e5819192c2d"></a><!-- doxytag: member="matrix.c::ISR" ref="aec43762dc86e029b395d4e5819192c2d" args="(TIMER0_COMPA_vect)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">TIMER0_COMPA_vect&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    <a class="code" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it">_display_next_line</a>();
+
+    <span class="comment">// check frequency is right by toggling a bit every cycle</span>
+    <a class="code" href="matrix_8h.html#ab798f60243a5bba94d99175e4c05d9c1">BUTTON_DDR</a> |= 0x01;
+    <a class="code" href="matrix_8h.html#ac8ba909fc8614df64040d2e12c0780e4" title="Buttons are active low!">BUTTON_PORT</a> ^= 0x01;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="matrix_8c_aec43762dc86e029b395d4e5819192c2d_cgraph.png" border="0" usemap="#matrix_8c_aec43762dc86e029b395d4e5819192c2d_cgraph" alt=""/></div>
+<map name="matrix_8c_aec43762dc86e029b395d4e5819192c2d_cgraph" id="matrix_8c_aec43762dc86e029b395d4e5819192c2d_cgraph">
+<area shape="rect" id="node3" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it" alt="" coords="97,5,226,32"/><area shape="rect" id="node5" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flips the order of bits in a byte" alt="" coords="275,5,341,32"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ac53875d2fe37830e90522c3ae546fc1a"></a><!-- doxytag: member="matrix.c::line_callback" ref="ac53875d2fe37830e90522c3ae546fc1a" args="(uint8_t line_pos)" -->
@@ -442,8 +495,14 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 
 <p>Clears entire buffer. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>implement this function </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>implement this function </dd></dl>
 <div class="fragment"><pre class="fragment">{
+    uint8_t i;
+    <span class="keywordflow">for</span>(i=0; i&lt;8; i++)
+    {
+        <a class="code" href="matrix_8c.html#a2a2f62689c9e08fd4cca02b78f384cb7">_red_buffer</a>[<a class="code" href="matrix_8c.html#aa327f246be5e5bbcf38e1f834955192b">draw_buffer</a>][i] = 0;
+        <a class="code" href="matrix_8c.html#aebcf98832a09195d63942c672f4e8143">_green_buffer</a>[<a class="code" href="matrix_8c.html#aa327f246be5e5bbcf38e1f834955192b">draw_buffer</a>][i] = 0;
+    }
     <span class="keywordflow">return</span>;
 }
 </pre></div>
@@ -502,37 +561,6 @@ Here is the call graph for this function:</div>
     <span class="keywordflow">return</span>;
 }
 </pre></div>
-</div>
-</div>
-<a class="anchor" id="a8435e35d383d757f077555265f509c95"></a><!-- doxytag: member="matrix.c::matrix_test" ref="a8435e35d383d757f077555265f509c95" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void matrix_test </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>temporary test function </p>
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it">_display_next_line</a>();
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="matrix_8c_a8435e35d383d757f077555265f509c95_cgraph.png" border="0" usemap="#matrix_8c_a8435e35d383d757f077555265f509c95_cgraph" alt=""/></div>
-<map name="matrix_8c_a8435e35d383d757f077555265f509c95_cgraph" id="matrix_8c_a8435e35d383d757f077555265f509c95_cgraph">
-<area shape="rect" id="node3" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it" alt="" coords="142,5,271,32"/><area shape="rect" id="node5" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flips the order of bits in a byte" alt="" coords="320,5,387,32"/></map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="a2e177ede912420218593e39341fe7299"></a><!-- doxytag: member="matrix.c::switch_buffers" ref="a2e177ede912420218593e39341fe7299" args="(void)" -->
@@ -661,7 +689,7 @@ Here is the call graph for this function:</div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 24 2011 02:33:02 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 24 2011 17:18:21 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

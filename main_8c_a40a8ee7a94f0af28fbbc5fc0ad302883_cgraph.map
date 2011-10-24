@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$main_8c.html#ad8071c60f254c436847d5a8dc80c44b8" title="move_car_left" alt="" coords="100,5,201,32"/>
-<area shape="rect" id="node5" href="$main_8c.html#aa9f87b6a3caaaa3a3b4ef13e383c0402" title="move_car_right" alt="" coords="96,56,205,83"/>
+<area shape="rect" id="node3" href="$main_8c.html#ad8071c60f254c436847d5a8dc80c44b8" title="Move the car to the left, stop if we hit the wall." alt="" coords="100,5,201,32"/>
+<area shape="rect" id="node5" href="$main_8c.html#aa9f87b6a3caaaa3a3b4ef13e383c0402" title="Move the car to the right, stop if we hit the wall." alt="" coords="96,56,205,83"/>
 </map>

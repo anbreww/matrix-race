@@ -115,10 +115,18 @@ Defines</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Green cathodes (active high)  <a href="#a900bbec351c7a1acd783a1bb9b97b11d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#af6f3b640cb9bb9202423119ac4a10610">RED_DDR</a>&#160;&#160;&#160;DDRB</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#adddb05ced3a14154ef548ff39ce30035">GREEN_DDR</a>&#160;&#160;&#160;DDRC</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ab798f60243a5bba94d99175e4c05d9c1">BUTTON_DDR</a>&#160;&#160;&#160;DDRD</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ac8ba909fc8614df64040d2e12c0780e4">BUTTON_PORT</a>&#160;&#160;&#160;PORTD</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Buttons are active low!  <a href="#ac8ba909fc8614df64040d2e12c0780e4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#abc2ad14f0789907024ac765711ffd3da">BUTTON_PIN</a>&#160;&#160;&#160;PIND</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a4aea8f880b2ade2327bbdabf6ec099ba">BTN_1</a>&#160;&#160;&#160;2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a07a21ca3fb839836109b8ac0055a4db9">BTN_2</a>&#160;&#160;&#160;3</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a8c6fbf245e6091e94417fc0c70a30aa6">BTN_3</a>&#160;&#160;&#160;6</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ade88d0a15c0b0e33de11b941f53deb75">BTN_4</a>&#160;&#160;&#160;7</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a93dcc9119e26b21a1baf894b31973e42">BUTTON_PRESSED</a>(button)&#160;&#160;&#160;((BUTTON_PIN &amp; _BV(button)) == 0)</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a24a2e20d62ec1206c2833f140720d852">init_matrix</a> (void)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisation functions.  <a href="#a24a2e20d62ec1206c2833f140720d852"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a69259b2d664eefc2c476f7bc334e919d">matrix_clear</a> (void)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears entire buffer.  <a href="#a69259b2d664eefc2c476f7bc334e919d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a5a28f10819ed671455227f505a04ed81">matrix_set_line</a> (uint8_t line_id, uint8_t values, uint8_t colour)</td></tr>
@@ -131,8 +139,10 @@ Functions</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Functions to draw stuff in the matrix buffer. </p>
 <dl class="author"><dt><b>Author:</b></dt><dd>Andrew Watson (<a href="mailto:andy@watsons.ch">andy@watsons.ch</a>) </dd></dl>
-<dl class="version"><dt><b>Version:</b></dt><dd>0.1 </dd></dl>
-<dl class="date"><dt><b>Date:</b></dt><dd>2011-10-24 What do we want to be able to do?<ol type="1">
+<dl class="date"><dt><b>Date:</b></dt><dd>2011-10-24 </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.1</dd></dl>
+<p>What do we want to be able to do?</p>
+<ol type="1">
 <li>Use function 5 (bitmask) for the low level part.</li>
 <li>Clear the whole matrix</li>
 <li>Clear only one colour</li>
@@ -148,9 +158,6 @@ Functions</h2></td></tr>
 </li>
 <li>read pixels of a line (red or green), returns uint8</li>
 <li>read a pixel (returns OFF, RED, GREEN)</li>
-</ol>
-</dd></dl>
-<ol type="1">
 <li>optional : provide the same functionality as lines on the columns</li>
 <li>to think about : do this directly, or double-buffer? </li>
 </ol>
@@ -180,6 +187,118 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Anode port is active low. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4aea8f880b2ade2327bbdabf6ec099ba"></a><!-- doxytag: member="matrix.h::BTN_1" ref="a4aea8f880b2ade2327bbdabf6ec099ba" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BTN_1&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a07a21ca3fb839836109b8ac0055a4db9"></a><!-- doxytag: member="matrix.h::BTN_2" ref="a07a21ca3fb839836109b8ac0055a4db9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BTN_2&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8c6fbf245e6091e94417fc0c70a30aa6"></a><!-- doxytag: member="matrix.h::BTN_3" ref="a8c6fbf245e6091e94417fc0c70a30aa6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BTN_3&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ade88d0a15c0b0e33de11b941f53deb75"></a><!-- doxytag: member="matrix.h::BTN_4" ref="ade88d0a15c0b0e33de11b941f53deb75" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BTN_4&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab798f60243a5bba94d99175e4c05d9c1"></a><!-- doxytag: member="matrix.h::BUTTON_DDR" ref="ab798f60243a5bba94d99175e4c05d9c1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUTTON_DDR&#160;&#160;&#160;DDRD</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abc2ad14f0789907024ac765711ffd3da"></a><!-- doxytag: member="matrix.h::BUTTON_PIN" ref="abc2ad14f0789907024ac765711ffd3da" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUTTON_PIN&#160;&#160;&#160;PIND</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac8ba909fc8614df64040d2e12c0780e4"></a><!-- doxytag: member="matrix.h::BUTTON_PORT" ref="ac8ba909fc8614df64040d2e12c0780e4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUTTON_PORT&#160;&#160;&#160;PORTD</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Buttons are active low! </p>
+
+</div>
+</div>
+<a class="anchor" id="a93dcc9119e26b21a1baf894b31973e42"></a><!-- doxytag: member="matrix.h::BUTTON_PRESSED" ref="a93dcc9119e26b21a1baf894b31973e42" args="(button)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUTTON_PRESSED</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">button</td><td>)</td>
+          <td>&#160;&#160;&#160;((BUTTON_PIN &amp; _BV(button)) == 0)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Tells you if <em>button</em> is currently pressed</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>1 if true, 0 otherwise </dd></dl>
 
 </div>
 </div>
@@ -314,15 +433,38 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Initialisation functions. </p>
 <p>Sets port directions</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>add timer initializations to this function </dd></dl>
+<p>We want an 800Hz interrupt. in the documentation, Foc refers to the frequency of the output waveform. Since the output is toggled at every compare, the actual interrupt frequency is twice the frequency of the output compare waveform. Therefore, we only need foc = 400. </p>
+<div class="fragment"><pre class="fragment">
+
+                 fclkio
+ foc_nx = -------------------
+          2 * N * (1 + OCRnx)
+ 
+  </pre></div><p>with fclkio = 14745600, we get <code>N</code> = 64 (prescaler) and <code>OCRnx</code> = 71 (compare value) </p>
 <div class="fragment"><pre class="fragment">{
-    DDRA = 0xFF;
-    DDRB = 0xFF;
-    DDRC = 0xFF;
-    DDRD = 0x00;
+    <span class="comment">/*</span>
+<span class="comment">     * set up I/O : LEDs as outputs, buttons as inputs</span>
+<span class="comment">     */</span>
+    <a class="code" href="matrix_8h.html#a1b69efd31faf5c07a71d692513ae3007">ANODE_DDR</a> = 0xFF;
+    <a class="code" href="matrix_8h.html#af6f3b640cb9bb9202423119ac4a10610">RED_DDR</a> = 0xFF;
+    <a class="code" href="matrix_8h.html#adddb05ced3a14154ef548ff39ce30035">GREEN_DDR</a> = 0xFF;
+    <a class="code" href="matrix_8h.html#ab798f60243a5bba94d99175e4c05d9c1">BUTTON_DDR</a> = 0x00;
+
+    <span class="comment">/*</span>
+<span class="comment">     * set up an 800 Hz timer to refresh lines.</span>
+<span class="comment">     */</span>
+    TCCR0A = (0b10 &lt;&lt; WGM00);   <span class="comment">// Clear timer on compare, OCR0A</span>
+    TCCR0B = (0 &lt;&lt; WGM02);
+    TCCR0B = (0b100&lt;&lt;CS00);     <span class="comment">// Prescaler = 64</span>
+    OCR0A  = 71;                <span class="comment">// Top limit for timer</span>
+    TCNT0 = 0;                  <span class="comment">// Just to make sure.</span>
+
+    TIMSK0 |= (1&lt;&lt;OCIE0A);      <span class="comment">// Enable compare interrupt on timer 0 A</span>
+
+    sei();                      <span class="comment">// Enable global interrupts</span>
+
+
     <span class="keywordflow">return</span>;
 }
 </pre></div>
@@ -344,8 +486,14 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Clears entire buffer. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>implement this function </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>implement this function </dd></dl>
 <div class="fragment"><pre class="fragment">{
+    uint8_t i;
+    <span class="keywordflow">for</span>(i=0; i&lt;8; i++)
+    {
+        <a class="code" href="matrix_8c.html#a2a2f62689c9e08fd4cca02b78f384cb7">_red_buffer</a>[<a class="code" href="matrix_8c.html#aa327f246be5e5bbcf38e1f834955192b">draw_buffer</a>][i] = 0;
+        <a class="code" href="matrix_8c.html#aebcf98832a09195d63942c672f4e8143">_green_buffer</a>[<a class="code" href="matrix_8c.html#aa327f246be5e5bbcf38e1f834955192b">draw_buffer</a>][i] = 0;
+    }
     <span class="keywordflow">return</span>;
 }
 </pre></div>
@@ -422,18 +570,6 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>temporary test function </p>
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it">_display_next_line</a>();
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="matrix_8h_aad3d0f4acb79e8a9b61eda59dc3a12b2_cgraph.png" border="0" usemap="#matrix_8h_aad3d0f4acb79e8a9b61eda59dc3a12b2_cgraph" alt=""/></div>
-<map name="matrix_8h_aad3d0f4acb79e8a9b61eda59dc3a12b2_cgraph" id="matrix_8h_aad3d0f4acb79e8a9b61eda59dc3a12b2_cgraph">
-<area shape="rect" id="node3" href="matrix_8c.html#a6fcb2d570fa5cf0fa60e9d2f0ec47db4" title="load the next line from the buffer and display it" alt="" coords="142,5,271,32"/><area shape="rect" id="node5" href="matrix_8c.html#a6c9a976a0a6f85666c2dde7b471f3026" title="flips the order of bits in a byte" alt="" coords="320,5,387,32"/></map>
-</div>
-</p>
 
 </div>
 </div>
@@ -478,7 +614,7 @@ Here is the call graph for this function:</div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 24 2011 02:33:02 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 24 2011 17:18:21 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
