@@ -61,8 +61,6 @@ void init_matrix(void);
 
 /**
  * @brief  Clears entire buffer
- *
- * @todo    implement this function
  */
 void matrix_clear(void);
 
