@@ -110,8 +110,11 @@ Defines</h2></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#afe35a1f8874f44c04acfdec83ef9ef8e">game_init</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#af59b667a0f4bdf57efaf36ce6176ec43">game_start_sequence</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Start sequence : flashing lights!  <a href="#af59b667a0f4bdf57efaf36ce6176ec43"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a38cf15499a4186845b5d0b03bb6d12e1">setup_interrupts</a> (void)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up pin change interrupts for the buttons.  <a href="#a38cf15499a4186845b5d0b03bb6d12e1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a60d7168a24dedac324a9ffd50d3be779">check_for_collisions</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aa9f87b6a3caaaa3a3b4ef13e383c0402">move_car_right</a> (void)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the car to the right, stop if we hit the wall.  <a href="#aa9f87b6a3caaaa3a3b4ef13e383c0402"></a><br/></td></tr>
@@ -123,7 +126,7 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a648b2326fe25ce77ab38e954188c1445">car_pos</a> = 0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3316c2a0ad28b31ed15e4627066da015">track_pos</a> = 0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structFlags.html">Flags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#afee5134ee08b75ecf2dba98c00d534ad">flags</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structFlags.html">Flags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a87d7d5cbd0eb1e863cfa1a58eeda605e">game_flags</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A simple car race for Robopoly's LED matrix module. </p>
@@ -146,6 +149,43 @@ Variables</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a60d7168a24dedac324a9ffd50d3be779"></a><!-- doxytag: member="main.c::check_for_collisions" ref="a60d7168a24dedac324a9ffd50d3be779" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void check_for_collisions </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    uint8_t track = <a class="code" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory.">track_load_line</a>(0);
+    <span class="keywordflow">if</span>( (<a class="code" href="main_8c.html#a648b2326fe25ce77ab38e954188c1445">car_pos</a> &amp; track) != 0)
+    {
+        <span class="comment">// we have a collision!</span>
+        <a class="code" href="main_8c.html#a87d7d5cbd0eb1e863cfa1a58eeda605e">game_flags</a>.<a class="code" href="structFlags.html#a25b57f7da5001c0f34a2b6823fe9f25e">collision</a> = 1;
+    } <span class="keywordflow">else</span> {
+        <a class="code" href="main_8c.html#a87d7d5cbd0eb1e863cfa1a58eeda605e">game_flags</a>.<a class="code" href="structFlags.html#a25b57f7da5001c0f34a2b6823fe9f25e">collision</a> = 0;
+    }
+
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8c_a60d7168a24dedac324a9ffd50d3be779_cgraph.png" border="0" usemap="#main_8c_a60d7168a24dedac324a9ffd50d3be779_cgraph" alt=""/></div>
+<map name="main_8c_a60d7168a24dedac324a9ffd50d3be779_cgraph" id="main_8c_a60d7168a24dedac324a9ffd50d3be779_cgraph">
+<area shape="rect" id="node3" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory." alt="" coords="192,5,301,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="afe35a1f8874f44c04acfdec83ef9ef8e"></a><!-- doxytag: member="main.c::game_init" ref="afe35a1f8874f44c04acfdec83ef9ef8e" args="(void)" -->
 <div class="memitem">
 <div class="memproto">
@@ -170,6 +210,70 @@ Variables</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="af59b667a0f4bdf57efaf36ce6176ec43"></a><!-- doxytag: member="main.c::game_start_sequence" ref="af59b667a0f4bdf57efaf36ce6176ec43" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game_start_sequence </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Start sequence : flashing lights! </p>
+<div class="fragment"><pre class="fragment">{
+    <span class="comment">// First step : a red square</span>
+    <a class="code" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer.">matrix_clear</a>();
+    <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(3,0b11000000,<a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+    <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(4,0b11000000,<a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+    <a class="code" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around.">switch_buffers</a>();
+
+    _delay_ms(500);
+
+    <span class="comment">// second step : two red squares</span>
+    <a class="code" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer.">matrix_clear</a>();
+    <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(3,0b11011000,<a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+    <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(4,0b11011000,<a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+    <a class="code" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around.">switch_buffers</a>();
+
+    _delay_ms(500);
+
+    <span class="comment">// third step : three red squares</span>
+    <a class="code" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer.">matrix_clear</a>();
+    <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(3,0b11011011,<a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+    <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(4,0b11011011,<a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+    <a class="code" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around.">switch_buffers</a>();
+
+    _delay_ms(500);
+
+    <span class="comment">// finally : all green</span>
+    <a class="code" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer.">matrix_clear</a>();
+    <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(3,0b11011011,<a class="code" href="matrix_8h.html#a80b0a7cdacdac141d4b98dafabbd0caa" title="Act on green buffer.">M_GREEN</a>);
+    <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(4,0b11011011,<a class="code" href="matrix_8h.html#a80b0a7cdacdac141d4b98dafabbd0caa" title="Act on green buffer.">M_GREEN</a>);
+    <a class="code" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around.">switch_buffers</a>();
+
+    _delay_ms(500);
+
+    <span class="comment">// and go!</span>
+    <span class="keywordflow">return</span>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8c_af59b667a0f4bdf57efaf36ce6176ec43_cgraph.png" border="0" usemap="#main_8c_af59b667a0f4bdf57efaf36ce6176ec43_cgraph" alt=""/></div>
+<map name="main_8c_af59b667a0f4bdf57efaf36ce6176ec43_cgraph" id="main_8c_af59b667a0f4bdf57efaf36ce6176ec43_cgraph">
+<area shape="rect" id="node3" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer." alt="" coords="215,5,308,32"/><area shape="rect" id="node5" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line." alt="" coords="206,56,317,83"/><area shape="rect" id="node7" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around." alt="" coords="209,107,313,133"/></map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a40a8ee7a94f0af28fbbc5fc0ad302883"></a><!-- doxytag: member="main.c::ISR" ref="a40a8ee7a94f0af28fbbc5fc0ad302883" args="(PCINT3_vect)" -->
 <div class="memitem">
 <div class="memproto">
@@ -189,8 +293,6 @@ Variables</h2></td></tr>
 <p>This routine is called on a pin change interrupt. It's incapable of differentiating between different buttons when it's called, so we decode the button presses inside the function. We'll also try to do some debouncing. </p>
 <div class="fragment"><pre class="fragment">{
     DDRD = 0x00;
-
-    uint8_t input = PIND;
 
     <span class="keywordflow">if</span>( <a class="code" href="matrix_8h.html#a93dcc9119e26b21a1baf894b31973e42">BUTTON_PRESSED</a>(<a class="code" href="matrix_8h.html#a4aea8f880b2ade2327bbdabf6ec099ba">BTN_1</a>) )
     {
@@ -217,7 +319,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8c_a40a8ee7a94f0af28fbbc5fc0ad302883_cgraph.png" border="0" usemap="#main_8c_a40a8ee7a94f0af28fbbc5fc0ad302883_cgraph" alt=""/></div>
 <map name="main_8c_a40a8ee7a94f0af28fbbc5fc0ad302883_cgraph" id="main_8c_a40a8ee7a94f0af28fbbc5fc0ad302883_cgraph">
-<area shape="rect" id="node3" href="main_8c.html#ad8071c60f254c436847d5a8dc80c44b8" title="Move the car to the left, stop if we hit the wall." alt="" coords="100,5,201,32"/><area shape="rect" id="node5" href="main_8c.html#aa9f87b6a3caaaa3a3b4ef13e383c0402" title="Move the car to the right, stop if we hit the wall." alt="" coords="96,56,205,83"/></map>
+<area shape="rect" id="node3" href="main_8c.html#ad8071c60f254c436847d5a8dc80c44b8" title="Move the car to the left, stop if we hit the wall." alt="" coords="100,5,201,32"/><area shape="rect" id="node9" href="main_8c.html#aa9f87b6a3caaaa3a3b4ef13e383c0402" title="Move the car to the right, stop if we hit the wall." alt="" coords="96,56,205,83"/><area shape="rect" id="node5" href="main_8c.html#a60d7168a24dedac324a9ffd50d3be779" title="check_for_collisions" alt="" coords="253,31,392,57"/><area shape="rect" id="node7" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory." alt="" coords="440,31,549,57"/></map>
 </div>
 </p>
 
@@ -249,11 +351,13 @@ Here is the call graph for this function:</div>
 <span class="comment">     */</span>
     <a class="code" href="main_8c.html#afe35a1f8874f44c04acfdec83ef9ef8e">game_init</a>();
     <a class="code" href="main_8c.html#a38cf15499a4186845b5d0b03bb6d12e1" title="Set up pin change interrupts for the buttons.">setup_interrupts</a>();
+
+    <a class="code" href="main_8c.html#af59b667a0f4bdf57efaf36ce6176ec43" title="Start sequence : flashing lights!">game_start_sequence</a>();
         
-        <a class="code" href="main_8c.html#afee5134ee08b75ecf2dba98c00d534ad">flags</a>.<a class="code" href="structFlags.html#a5792d528647a86e48669dfeb50c06241">game_running</a> = 1;
+        <a class="code" href="main_8c.html#a87d7d5cbd0eb1e863cfa1a58eeda605e">game_flags</a>.<a class="code" href="structFlags.html#a5792d528647a86e48669dfeb50c06241">game_running</a> = 1;
 
     <span class="comment">// Start loop</span>
-    <span class="keywordflow">while</span>(<a class="code" href="main_8c.html#afee5134ee08b75ecf2dba98c00d534ad">flags</a>.<a class="code" href="structFlags.html#a5792d528647a86e48669dfeb50c06241">game_running</a> == 1)
+    <span class="keywordflow">while</span>(<a class="code" href="main_8c.html#a87d7d5cbd0eb1e863cfa1a58eeda605e">game_flags</a>.<a class="code" href="structFlags.html#a5792d528647a86e48669dfeb50c06241">game_running</a> == 1)
     {
         <span class="comment">// reset display</span>
         <a class="code" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer.">matrix_clear</a>();
@@ -271,7 +375,18 @@ Here is the call graph for this function:</div>
 
             <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(i,line,<a class="code" href="matrix_8h.html#a80b0a7cdacdac141d4b98dafabbd0caa" title="Act on green buffer.">M_GREEN</a>);
         }
+
         _delay_ms(1);
+
+        <a class="code" href="main_8c.html#a60d7168a24dedac324a9ffd50d3be779">check_for_collisions</a>();
+        <span class="keywordflow">if</span> (<a class="code" href="main_8c.html#a87d7d5cbd0eb1e863cfa1a58eeda605e">game_flags</a>.<a class="code" href="structFlags.html#a25b57f7da5001c0f34a2b6823fe9f25e">collision</a> == 1) {
+            <span class="comment">// draw a **sadface**</span>
+            <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(6, 0b00100100, <a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+            <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(5, 0b00100100, <a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+            <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(3, 0b00011000, <a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+            <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(2, 0b00100100, <a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+            <a class="code" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line.">matrix_set_line</a>(1, 0b00000000, <a class="code" href="matrix_8h.html#a625f3fea32732c3fa32f6b3ddd75f905" title="Act on red buffer.">M_RED</a>);
+        }
 
         <span class="comment">// redraw screen</span>
         <span class="comment">//switch_buffers();</span>
@@ -293,7 +408,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph.png" border="0" usemap="#main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" alt=""/></div>
 <map name="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph" id="main_8c_a840291bc02cba5474a4cb46a9b9566fe_cgraph">
-<area shape="rect" id="node3" href="matrix_8c.html#a24a2e20d62ec1206c2833f140720d852" title="init_matrix" alt="" coords="147,5,229,32"/><area shape="rect" id="node5" href="main_8c.html#afe35a1f8874f44c04acfdec83ef9ef8e" title="game_init" alt="" coords="149,56,227,83"/><area shape="rect" id="node7" href="main_8c.html#a38cf15499a4186845b5d0b03bb6d12e1" title="Set up pin change interrupts for the buttons." alt="" coords="131,107,245,133"/><area shape="rect" id="node9" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer." alt="" coords="141,157,235,184"/><area shape="rect" id="node11" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line." alt="" coords="133,208,243,235"/><area shape="rect" id="node13" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory." alt="" coords="133,259,243,285"/><area shape="rect" id="node15" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around." alt="" coords="136,309,240,336"/><area shape="rect" id="node17" href="track_8c.html#ac26da6e1020a3591bec0b53c99c82e27" title="Move forward in the track." alt="" coords="105,360,271,387"/></map>
+<area shape="rect" id="node3" href="matrix_8c.html#a24a2e20d62ec1206c2833f140720d852" title="init_matrix" alt="" coords="147,5,229,32"/><area shape="rect" id="node5" href="main_8c.html#afe35a1f8874f44c04acfdec83ef9ef8e" title="game_init" alt="" coords="149,56,227,83"/><area shape="rect" id="node7" href="main_8c.html#a38cf15499a4186845b5d0b03bb6d12e1" title="Set up pin change interrupts for the buttons." alt="" coords="131,107,245,133"/><area shape="rect" id="node9" href="main_8c.html#af59b667a0f4bdf57efaf36ce6176ec43" title="Start sequence : flashing lights!" alt="" coords="113,208,263,235"/><area shape="rect" id="node11" href="matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer." alt="" coords="329,164,423,191"/><area shape="rect" id="node13" href="matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line." alt="" coords="321,227,431,253"/><area shape="rect" id="node15" href="matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around." alt="" coords="324,303,428,329"/><area shape="rect" id="node19" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory." alt="" coords="321,385,431,412"/><area shape="rect" id="node21" href="main_8c.html#a60d7168a24dedac324a9ffd50d3be779" title="check_for_collisions" alt="" coords="119,411,257,437"/><area shape="rect" id="node25" href="track_8c.html#ac26da6e1020a3591bec0b53c99c82e27" title="Move forward in the track." alt="" coords="105,461,271,488"/></map>
 </div>
 </p>
 
@@ -320,8 +435,19 @@ Here is the call graph for this function:</div>
         <a class="code" href="main_8c.html#a648b2326fe25ce77ab38e954188c1445">car_pos</a> &lt;&lt;= 1;
     <span class="keywordflow">else</span>
         <a class="code" href="main_8c.html#a648b2326fe25ce77ab38e954188c1445">car_pos</a> = 0x80;
+
+    <a class="code" href="main_8c.html#a60d7168a24dedac324a9ffd50d3be779">check_for_collisions</a>();
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8c_ad8071c60f254c436847d5a8dc80c44b8_cgraph.png" border="0" usemap="#main_8c_ad8071c60f254c436847d5a8dc80c44b8_cgraph" alt=""/></div>
+<map name="main_8c_ad8071c60f254c436847d5a8dc80c44b8_cgraph" id="main_8c_ad8071c60f254c436847d5a8dc80c44b8_cgraph">
+<area shape="rect" id="node3" href="main_8c.html#a60d7168a24dedac324a9ffd50d3be779" title="check_for_collisions" alt="" coords="155,5,293,32"/><area shape="rect" id="node5" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory." alt="" coords="341,5,451,32"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="aa9f87b6a3caaaa3a3b4ef13e383c0402"></a><!-- doxytag: member="main.c::move_car_right" ref="aa9f87b6a3caaaa3a3b4ef13e383c0402" args="(void)" -->
@@ -345,8 +471,19 @@ Here is the call graph for this function:</div>
         <a class="code" href="main_8c.html#a648b2326fe25ce77ab38e954188c1445">car_pos</a> &gt;&gt;= 1;
     <span class="keywordflow">else</span>
         <a class="code" href="main_8c.html#a648b2326fe25ce77ab38e954188c1445">car_pos</a> = 0x01;
+
+    <a class="code" href="main_8c.html#a60d7168a24dedac324a9ffd50d3be779">check_for_collisions</a>();
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8c_aa9f87b6a3caaaa3a3b4ef13e383c0402_cgraph.png" border="0" usemap="#main_8c_aa9f87b6a3caaaa3a3b4ef13e383c0402_cgraph" alt=""/></div>
+<map name="main_8c_aa9f87b6a3caaaa3a3b4ef13e383c0402_cgraph" id="main_8c_aa9f87b6a3caaaa3a3b4ef13e383c0402_cgraph">
+<area shape="rect" id="node3" href="main_8c.html#a60d7168a24dedac324a9ffd50d3be779" title="check_for_collisions" alt="" coords="163,5,301,32"/><area shape="rect" id="node5" href="track_8c.html#a9b84887c7ed996512787ac66954ce8a4" title="Load a line from the track stored in program memory." alt="" coords="349,5,459,32"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a38cf15499a4186845b5d0b03bb6d12e1"></a><!-- doxytag: member="main.c::setup_interrupts" ref="a38cf15499a4186845b5d0b03bb6d12e1" args="(void)" -->
@@ -395,12 +532,12 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="afee5134ee08b75ecf2dba98c00d534ad"></a><!-- doxytag: member="main.c::flags" ref="afee5134ee08b75ecf2dba98c00d534ad" args="" -->
+<a class="anchor" id="a87d7d5cbd0eb1e863cfa1a58eeda605e"></a><!-- doxytag: member="main.c::game_flags" ref="a87d7d5cbd0eb1e863cfa1a58eeda605e" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct <a class="el" href="structFlags.html">Flags</a>  <a class="el" href="main_8c.html#afee5134ee08b75ecf2dba98c00d534ad">flags</a></td>
+          <td class="memname">struct <a class="el" href="structFlags.html">Flags</a>  <a class="el" href="main_8c.html#a87d7d5cbd0eb1e863cfa1a58eeda605e">game_flags</a></td>
         </tr>
       </table>
 </div>
@@ -439,7 +576,7 @@ Here is the call graph for this function:</div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 24 2011 17:38:57 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 24 2011 19:18:27 for Matrix-Race by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

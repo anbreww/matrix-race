@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$matrix_8c.html#a69259b2d664eefc2c476f7bc334e919d" title="Clears entire buffer." alt="" coords="215,5,308,32"/>
+<area shape="rect" id="node5" href="$matrix_8c.html#a5a28f10819ed671455227f505a04ed81" title="Set the pixels of a given line." alt="" coords="206,56,317,83"/>
+<area shape="rect" id="node7" href="$matrix_8c.html#a2e177ede912420218593e39341fe7299" title="Switch buffers around." alt="" coords="209,107,313,133"/>
+</map>
